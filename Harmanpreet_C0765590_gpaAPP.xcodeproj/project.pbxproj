@@ -9,21 +9,25 @@
 /* Begin PBXBuildFile section */
 		B5F8175E237C9FAD00986C13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F8175D237C9FAD00986C13 /* AppDelegate.swift */; };
 		B5F81760237C9FAD00986C13 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F8175F237C9FAD00986C13 /* SceneDelegate.swift */; };
-		B5F81762237C9FAD00986C13 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F81761237C9FAD00986C13 /* ViewController.swift */; };
 		B5F81765237C9FAD00986C13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5F81763237C9FAD00986C13 /* Main.storyboard */; };
 		B5F81767237C9FB100986C13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5F81766237C9FB100986C13 /* Assets.xcassets */; };
 		B5F8176A237C9FB100986C13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5F81768237C9FB100986C13 /* LaunchScreen.storyboard */; };
+		B5F81772237CA0DE00986C13 /* StudentsListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F81771237CA0DE00986C13 /* StudentsListTVC.swift */; };
+		B5F81774237CA0F400986C13 /* StudentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F81773237CA0F400986C13 /* StudentModel.swift */; };
+		B5F81776237CB4E400986C13 /* AddNewStudentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F81775237CB4E400986C13 /* AddNewStudentVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B5F8175A237C9FAD00986C13 /* Harmanpreet_C0765590_gpaAPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Harmanpreet_C0765590_gpaAPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F8175D237C9FAD00986C13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5F8175F237C9FAD00986C13 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B5F81761237C9FAD00986C13 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B5F81764237C9FAD00986C13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5F81766237C9FB100986C13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5F81769237C9FB100986C13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5F8176B237C9FB100986C13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5F81771237CA0DE00986C13 /* StudentsListTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentsListTVC.swift; sourceTree = "<group>"; };
+		B5F81773237CA0F400986C13 /* StudentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentModel.swift; sourceTree = "<group>"; };
+		B5F81775237CB4E400986C13 /* AddNewStudentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewStudentVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,11 +62,13 @@
 			children = (
 				B5F8175D237C9FAD00986C13 /* AppDelegate.swift */,
 				B5F8175F237C9FAD00986C13 /* SceneDelegate.swift */,
-				B5F81761237C9FAD00986C13 /* ViewController.swift */,
 				B5F81763237C9FAD00986C13 /* Main.storyboard */,
 				B5F81766237C9FB100986C13 /* Assets.xcassets */,
 				B5F81768237C9FB100986C13 /* LaunchScreen.storyboard */,
 				B5F8176B237C9FB100986C13 /* Info.plist */,
+				B5F81771237CA0DE00986C13 /* StudentsListTVC.swift */,
+				B5F81773237CA0F400986C13 /* StudentModel.swift */,
+				B5F81775237CB4E400986C13 /* AddNewStudentVC.swift */,
 			);
 			path = Harmanpreet_C0765590_gpaAPP;
 			sourceTree = "<group>";
@@ -138,9 +144,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5F81762237C9FAD00986C13 /* ViewController.swift in Sources */,
+				B5F81772237CA0DE00986C13 /* StudentsListTVC.swift in Sources */,
+				B5F81774237CA0F400986C13 /* StudentModel.swift in Sources */,
 				B5F8175E237C9FAD00986C13 /* AppDelegate.swift in Sources */,
 				B5F81760237C9FAD00986C13 /* SceneDelegate.swift in Sources */,
+				B5F81776237CB4E400986C13 /* AddNewStudentVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
