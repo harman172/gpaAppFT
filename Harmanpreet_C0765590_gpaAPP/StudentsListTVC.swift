@@ -29,19 +29,11 @@ class StudentsListTVC: UITableViewController, UISearchResultsUpdating {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-//        let search = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         self.navigationItem.searchController = searchController
 
         
-//        searchController.searchResultsUpdater = self
-//        searchController.obscuresBackgroundDuringPresentation = false
-//        searchController.searchBar.placeholder = "Search"
-//        self.navigationItem.searchController = searchController
-//        definesPresentationContext = true
-        
     }
-    
     
     func updateSearchResults(for searchController: UISearchController) {
         
@@ -78,12 +70,9 @@ class StudentsListTVC: UITableViewController, UISearchResultsUpdating {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-//
-//        // Configure the cell...
-//
-//        return cell
-        
+
+//      Configure the cell...
+
         if let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell"){
             
             let name: String
@@ -99,7 +88,6 @@ class StudentsListTVC: UITableViewController, UISearchResultsUpdating {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print(Student.students)
         tableView.reloadData()
     }
     

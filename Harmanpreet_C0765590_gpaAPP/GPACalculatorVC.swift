@@ -12,6 +12,7 @@ class GPACalculatorVC: UIViewController {
 
     @IBOutlet var txtCourses: [UITextField]!
     @IBOutlet var courseNames: [UILabel]!
+    @IBOutlet weak var labelResult: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,62 +35,67 @@ class GPACalculatorVC: UIViewController {
             }
         }
         
+        
         var hours = [Int]()
         for value in courseNames{
-            let hour = value.text![value.text!.endIndex]
-            print(hour)
-//            hours.append()
+            let hour = String(value.text![value.text!.index(before: value.text!.endIndex)])
+            
+            hours.append(Int(hour) ?? 0)
         }
         
         var grades = [Double]()
-        
         for index in courses.indices{
             let c = Double(courses[index]) ?? 0.0
             grades.append( getGradePoints(course: c))
         }
         
+       
+        labelResult.text =  String(format: "%.1f / 4" , (calculateGPA(hours: hours, grades: grades)))
         
     }
     
     func getGradePoints(course: Double) -> Double{
-        var gradePoint = 0.0
         
         switch course {
             case 94...100:
-                gradePoint = 4.0
-                break
+                return 4.0
             case 87...93:
-                gradePoint = 3.7
-                break
+                return 3.7
             case 80...86:
-                gradePoint = 3.5
-                break
+                return 3.5
             case 77...79:
-                gradePoint = 3.2
-                break
+                return 3.2
             case 73...76:
-                gradePoint = 3.0
-                break
+                return 3.0
             case 70...72:
-                gradePoint = 2.7
-                break
+                return 2.7
             case 67...69:
-                gradePoint = 2.3
-                break
+                return 2.3
             case 63...66:
-                gradePoint = 2.0
-                break
+                return 2.0
             case 60...62:
-                gradePoint = 1.7
-                break
+                return 1.7
             case 50...59:
-                gradePoint = 1.0
-                break
+                return 1.0
             default:
-                gradePoint = 0.0
+                return 0.0
+        }
+    }
+    
+    func calculateGPA(hours: [Int], grades: [Double]) -> Double{
+        
+        var totalHours = 0
+        var GPA = 0.0
+        
+        for hour in hours{
+            for grade in grades{
+                GPA += (Double(hour) ?? 0.0) * grade
+                totalHours += hour
+            }
         }
         
-        return gradePoint
+        return GPA / Double(totalHours)
+        
     }
     
     func okAlert(title: String, message: String){

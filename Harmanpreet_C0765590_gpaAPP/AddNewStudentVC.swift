@@ -44,9 +44,25 @@ class AddNewStudentVC: UIViewController {
             okAlert(title: "Already registered", message: "The student has already been registered.")
         }
         else{
-            let s = Student(firstName: fname, lastName: lname, id: id)
-            Student.students.append(s)
-            _ = navigationController?.popViewController(animated: true)
+            
+            
+            let alertController = UIAlertController(title: "Are you sure?", message: "", preferredStyle: .actionSheet)
+            let noAction = UIAlertAction(title: "No Way!", style: .cancel, handler: nil)
+            let yesAction = UIAlertAction(title: "Yes, I'm Sure!", style: .default) { (yesaction) in
+            
+                let s = Student(firstName: fname, lastName: lname, id: id)
+                Student.students.append(s)
+                self.okAlert(title: "New Contact Saved", message: "\(fname) is now a student")
+                self.txtFirstName.text = ""
+                self.txtLastName.text = ""
+                self.txtID.text = ""
+            }
+            
+            alertController.addAction(noAction)
+            alertController.addAction(yesAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+            
         }
     }
     
@@ -57,6 +73,23 @@ class AddNewStudentVC: UIViewController {
         
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func confirmationAlert(title: String, message: String, studentName: String) -> Bool{
+        var confirm = false
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+        let noAction = UIAlertAction(title: "No Way!", style: .cancel, handler: nil)
+        let yesAction = UIAlertAction(title: "Yes, I'm Sure!", style: .default) { (yesaction) in
+            confirm = true
+            self.okAlert(title: "New Contact Saved", message: " is now a student")
+        }
+        
+        alertController.addAction(noAction)
+        alertController.addAction(yesAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+        return confirm
     }
     
     /*
