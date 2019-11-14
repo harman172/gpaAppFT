@@ -29,7 +29,7 @@ class AddNewStudentVC: UIViewController {
         let id = txtID.text!
         
         guard !fname.isEmpty && !lname.isEmpty && !id.isEmpty else {
-            print(fname.isEmpty)
+            okAlert(title: "Warning!!", message: "None of the fields can be empty.")
             return
         }
         
@@ -41,12 +41,22 @@ class AddNewStudentVC: UIViewController {
         }
         
         if alreadyExists{
-            print("Already taken")
+            okAlert(title: "Already registered", message: "The student has already been registered.")
         }
         else{
             let s = Student(firstName: fname, lastName: lname, id: id)
             Student.students.append(s)
+            _ = navigationController?.popViewController(animated: true)
         }
+    }
+    
+    func okAlert(title: String, message: String){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        okAction.setValue(UIColor.brown, forKey: "titleTextColor")
+        
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     /*

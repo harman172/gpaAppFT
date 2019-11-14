@@ -8,8 +8,18 @@
 
 import UIKit
 
-class StudentsListTVC: UITableViewController {
-
+class StudentsListTVC: UITableViewController, UISearchResultsUpdating {
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    var filteredData: [Student] = []
+    
+    var isSearchBarEmpty: Bool {
+      return searchController.searchBar.text?.isEmpty ?? true
+    }
+    var isFiltering: Bool {
+      return searchController.isActive && !isSearchBarEmpty
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -18,6 +28,32 @@ class StudentsListTVC: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+//        let search = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        self.navigationItem.searchController = searchController
+
+        
+//        searchController.searchResultsUpdater = self
+//        searchController.obscuresBackgroundDuringPresentation = false
+//        searchController.searchBar.placeholder = "Search"
+//        self.navigationItem.searchController = searchController
+//        definesPresentationContext = true
+        
+    }
+    
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        if let searchText = searchController.searchBar.text{
+            
+            filteredData = Student.students.filter{ (student) -> Bool in
+                let name = student.firstName + " " + student.lastName
+                return name.lowercased().contains(searchText.lowercased())
+            }
+        }
+        
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -32,6 +68,11 @@ class StudentsListTVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        
+        if isFiltering{
+            return filteredData.count
+        }
+        
         return Student.students.count
     }
 
@@ -44,13 +85,25 @@ class StudentsListTVC: UITableViewController {
 //        return cell
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell"){
-            cell.textLabel?.text = Student.students[indexPath.row].firstName + " " + Student.students[indexPath.row].lastName
+            
+            let name: String
+            if isFiltering{
+                name = filteredData[indexPath.row].firstName + " " + filteredData[indexPath.row].lastName
+            } else{
+                name = Student.students[indexPath.row].firstName + " " + Student.students[indexPath.row].lastName
+            }
+            cell.textLabel?.text = name
             return cell
         }
         return UITableViewCell()
     }
     
-
+    override func viewWillAppear(_ animated: Bool) {
+        print(Student.students)
+        tableView.reloadData()
+    }
+    
+   
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
