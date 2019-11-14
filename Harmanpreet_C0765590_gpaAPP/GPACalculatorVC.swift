@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import AVFoundation
 
 class GPACalculatorVC: UIViewController {
-
+    
+    
     @IBOutlet var txtCourses: [UITextField]!
     @IBOutlet var courseNames: [UILabel]!
     @IBOutlet weak var labelResult: UILabel!
+    @IBOutlet weak var calculate: UIButton!
+    
+    var audioPlayer: AVAudioPlayer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +25,11 @@ class GPACalculatorVC: UIViewController {
         // Do any additional setup after loading the view.
         
     }
+    
+    @IBAction func textFieldDoneEditing(_ sender: UITextField) {
+        sender.resignFirstResponder()
+    }
+    
     
     
     @IBAction func btnCalculate(_ sender: UIButton) {
@@ -36,22 +46,42 @@ class GPACalculatorVC: UIViewController {
         }
         
         
-        var hours = [Int]()
+        let creditHours = creditHoursPerCourse()
+        let grades = gradesPerCourse(courses: courses)
+        
+        let calculatedGPA = calculateGPA(hours: creditHours, grades: grades)
+        labelResult.text =  String(format: "%.1f / 4" , calculatedGPA)
+        
+        if calculatedGPA > 2.8{
+            let soundURL = Bundle.main.url(forResource: "note7", withExtension: "wav")
+            audioPlayer = try! AVAudioPlayer(contentsOf: soundURL!)
+            audioPlayer.play()
+            
+        }
+        
+        
+        
+    }
+    
+    func creditHoursPerCourse() -> [Double]{
+        var hours = [Double]()
         for value in courseNames{
             let hour = String(value.text![value.text!.index(before: value.text!.endIndex)])
             
-            hours.append(Int(hour) ?? 0)
+            hours.append(Double(hour) ?? 0.0)
         }
         
+        return hours
+    }
+    
+    func gradesPerCourse(courses: [String]) -> [Double]{
         var grades = [Double]()
         for index in courses.indices{
             let c = Double(courses[index]) ?? 0.0
             grades.append( getGradePoints(course: c))
         }
         
-       
-        labelResult.text =  String(format: "%.1f / 4" , (calculateGPA(hours: hours, grades: grades)))
-        
+        return grades
     }
     
     func getGradePoints(course: Double) -> Double{
@@ -82,19 +112,19 @@ class GPACalculatorVC: UIViewController {
         }
     }
     
-    func calculateGPA(hours: [Int], grades: [Double]) -> Double{
+    func calculateGPA(hours: [Double], grades: [Double]) -> Double{
         
-        var totalHours = 0
+        var totalHours = 0.0
         var GPA = 0.0
         
         for hour in hours{
             for grade in grades{
-                GPA += (Double(hour) ?? 0.0) * grade
+                GPA += hour * grade
                 totalHours += hour
             }
         }
         
-        return GPA / Double(totalHours)
+        return GPA / totalHours
         
     }
     

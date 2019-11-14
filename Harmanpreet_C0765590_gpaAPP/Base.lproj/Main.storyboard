@@ -95,6 +95,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <connections>
+                                    <action selector="textFieldDoneEditing:" destination="lVL-gH-tb9" eventType="editingDidEnd" id="XLN-ld-RxJ"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Zf-wu-HlH">
                                 <rect key="frame" x="187" y="200" width="164" height="34"/>
@@ -142,6 +145,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="amn-Up-coM"/>
                     <connections>
+                        <outlet property="calculate" destination="5ar-zc-VHa" id="QGo-aP-BKl"/>
                         <outlet property="labelResult" destination="O5O-Ae-nPz" id="T2d-Tt-6gX"/>
                         <outletCollection property="txtCourses" destination="OdZ-BY-otW" collectionClass="NSMutableArray" id="NMc-Ja-oRr"/>
                         <outletCollection property="txtCourses" destination="0Zf-wu-HlH" collectionClass="NSMutableArray" id="nGG-ct-sHk"/>
@@ -193,6 +197,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textFieldDoneEditing:" destination="Hk7-4C-Aqw" eventType="editingDidEnd" id="V7N-6j-QE6"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="12345" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3nw-Kk-KF3">
                                 <rect key="frame" x="181" y="232" width="97" height="34"/>

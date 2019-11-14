@@ -17,9 +17,24 @@ class AddNewStudentVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        self.view.addGestureRecognizer(tapGesture)
 
         // Do any additional setup after loading the view.
     }
+    
+    @objc func viewTapped(){
+        txtFirstName.resignFirstResponder()
+        txtLastName.resignFirstResponder()
+        txtID.resignFirstResponder()
+    }
+    
+    
+    @IBAction func textFieldDoneEditing(_ sender: UITextField) {
+        txtFirstName.resignFirstResponder()
+    }
+    
     
     @IBAction func btnSave(_ sender: UIButton) {
         var alreadyExists = false
