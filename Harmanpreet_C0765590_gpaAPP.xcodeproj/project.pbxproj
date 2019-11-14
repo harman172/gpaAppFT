@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B515D273237D194D00318663 /* GPACalculatorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B515D272237D194D00318663 /* GPACalculatorVC.swift */; };
 		B5F8175E237C9FAD00986C13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F8175D237C9FAD00986C13 /* AppDelegate.swift */; };
 		B5F81760237C9FAD00986C13 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F8175F237C9FAD00986C13 /* SceneDelegate.swift */; };
 		B5F81765237C9FAD00986C13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5F81763237C9FAD00986C13 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B515D272237D194D00318663 /* GPACalculatorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPACalculatorVC.swift; sourceTree = "<group>"; };
 		B5F8175A237C9FAD00986C13 /* Harmanpreet_C0765590_gpaAPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Harmanpreet_C0765590_gpaAPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F8175D237C9FAD00986C13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5F8175F237C9FAD00986C13 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				B5F81771237CA0DE00986C13 /* StudentsListTVC.swift */,
 				B5F81773237CA0F400986C13 /* StudentModel.swift */,
 				B5F81775237CB4E400986C13 /* AddNewStudentVC.swift */,
+				B515D272237D194D00318663 /* GPACalculatorVC.swift */,
 			);
 			path = Harmanpreet_C0765590_gpaAPP;
 			sourceTree = "<group>";
@@ -149,6 +152,7 @@
 				B5F8175E237C9FAD00986C13 /* AppDelegate.swift in Sources */,
 				B5F81760237C9FAD00986C13 /* SceneDelegate.swift in Sources */,
 				B5F81776237CB4E400986C13 /* AddNewStudentVC.swift in Sources */,
+				B515D273237D194D00318663 /* GPACalculatorVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
