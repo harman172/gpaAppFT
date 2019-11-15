@@ -13,8 +13,15 @@ struct Student{
     var lastName: String
     var id: String
     
-    var grades: [String: [Double]]
-    var CGPA: Double
+    var grades: [[String: [Double]]]?
+    var CGPA: Double?
     
     static var students = [Student]()
+    static var curStudentIndex = 0
+    
+//    init(firstName: String, lastName: String, id: String){
+//        self.firstName = firstName
+//        self.lastName = lastName
+//        self.id = id
+//    }
 }

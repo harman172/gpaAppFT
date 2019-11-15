@@ -1,25 +1,15 @@
 //
-//  StudentsListTVC.swift
+//  SemestersListTVC.swift
 //  Harmanpreet_C0765590_gpaAPP
 //
-//  Created by Harmanpreet Kaur on 2019-11-13.
+//  Created by Harmanpreet Kaur on 2019-11-15.
 //  Copyright © 2019 Harmanpreet Kaur. All rights reserved.
 //
 
 import UIKit
 
-class StudentsListTVC: UITableViewController, UISearchResultsUpdating {
-    
-    let searchController = UISearchController(searchResultsController: nil)
-    var filteredData: [Student] = []
-    
-    var isSearchBarEmpty: Bool {
-      return searchController.searchBar.text?.isEmpty ?? true
-    }
-    var isFiltering: Bool {
-      return searchController.isActive && !isSearchBarEmpty
-    }
-    
+class SemestersListTVC: UITableViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,77 +19,40 @@ class StudentsListTVC: UITableViewController, UISearchResultsUpdating {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        searchController.searchResultsUpdater = self
-        self.navigationItem.searchController = searchController
-
+        let sem1 = Semesters(semester: "Semester 1", courses: ["MAD 3004","MAD 2303", "MAD 3463", "MAD 3115", "MAD 3125"])
+        let sem2 = Semesters(semester: "Semester 2", courses: ["MAD 3001","MAD 2234", "MAD 2115", "MAD 3632", "MAD 4115"])
+        let sem3 = Semesters(semester: "Semester 3", courses: ["MAD 2003","MAD 2016", "MAD 3006", "MAD 3215", "MAD 3022"])
         
-    }
-    
-    func updateSearchResults(for searchController: UISearchController) {
+        Semesters.semesters.append(sem1)
+        Semesters.semesters.append(sem2)
+        Semesters.semesters.append(sem3)
         
-        if let searchText = searchController.searchBar.text{
-            
-            filteredData = Student.students.filter{ (student) -> Bool in
-                let name = student.firstName + " " + student.lastName
-                return name.lowercased().contains(searchText.lowercased())
-            }
-        }
-        
-        tableView.reloadData()
     }
 
     // MARK: - Table view data source
-
-    /*
+/*
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 0
     }
- 
- */
-    
+*/
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        
-        if isFiltering{
-            return filteredData.count
-        }
-        
-        return Student.students.count
+        return Semesters.semesters.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-//      Configure the cell...
-
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell"){
-            
-            let name: String
-            if isFiltering{
-                name = filteredData[indexPath.row].firstName + " " + filteredData[indexPath.row].lastName
-            } else{
-                name = Student.students[indexPath.row].firstName + " " + Student.students[indexPath.row].lastName
-            }
-            cell.textLabel?.text = name
-            let cgpa = Student.students[indexPath.row].CGPA
-            if cgpa != nil{
-                cell.detailTextLabel?.text = "cgpa"
-            } 
+        
+        // Configure the cell...
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "semCell"){
+            cell.textLabel?.text = Semesters.semesters[indexPath.row].semester
             return cell
         }
         return UITableViewCell()
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Student.curStudentIndex = indexPath.row
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
-    }
-    
-   
+
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -135,14 +88,22 @@ class StudentsListTVC: UITableViewController, UISearchResultsUpdating {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        
+        if let dest = segue.destination as? GPACalculatorVC{
+            if let tableCell = sender as? UITableViewCell{
+                if let index = tableView.indexPath(for: tableCell)?.row{
+                    dest.curSem = index
+                }
+            }
+        }
     }
-    */
+    
 
 }

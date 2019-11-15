@@ -18,11 +18,17 @@ class GPACalculatorVC: UIViewController {
     @IBOutlet weak var calculate: UIButton!
     
     var audioPlayer: AVAudioPlayer!
+    var curSem: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        for index in Semesters.semesters[curSem!].courses.indices{
+            courseNames[index].text = Semesters.semesters[curSem!].courses[index]
+        }
+        
         
     }
     
@@ -50,10 +56,11 @@ class GPACalculatorVC: UIViewController {
         let grades = gradesPerCourse(courses: courses)
         
         let calculatedGPA = calculateGPA(hours: creditHours, grades: grades)
+//        Student.students[Student.curStudentIndex].grades[Semesters.semesters[curSem!]]
         labelResult.text =  String(format: "%.1f / 4" , calculatedGPA)
         
         if calculatedGPA > 2.8{
-            let soundURL = Bundle.main.url(forResource: "note7", withExtension: "wav")
+            let soundURL = Bundle.main.url(forResource: "Clapping", withExtension: "wav")
             audioPlayer = try! AVAudioPlayer(contentsOf: soundURL!)
             audioPlayer.play()
             
@@ -126,6 +133,12 @@ class GPACalculatorVC: UIViewController {
         
         return GPA / totalHours
         
+    }
+    
+    func calculateCGPA(){
+        for index in Student.students[Student.curStudentIndex].grades?.indices{
+            
+        }
     }
     
     func okAlert(title: String, message: String){
