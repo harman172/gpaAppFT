@@ -56,8 +56,11 @@ class GPACalculatorVC: UIViewController {
         let grades = gradesPerCourse(courses: courses)
         
         let calculatedGPA = calculateGPA(hours: creditHours, grades: grades)
-//        Student.students[Student.curStudentIndex].grades[Semesters.semesters[curSem!]]
-        labelResult.text =  String(format: "%.1f / 4" , calculatedGPA)
+        
+        Student.students[Student.curStudentIndex].grades[Semesters.semesters[curSem!].semester] = calculatedGPA
+        print(Student.students[Student.curStudentIndex].grades)   
+        labelResult.text =  String(format: "%.2f / 4" , calculatedGPA)
+        
         
         if calculatedGPA > 2.8{
             let soundURL = Bundle.main.url(forResource: "Clapping", withExtension: "wav")
@@ -135,11 +138,11 @@ class GPACalculatorVC: UIViewController {
         
     }
     
-    func calculateCGPA(){
-        for index in Student.students[Student.curStudentIndex].grades?.indices{
-            
-        }
-    }
+//    func calculateCGPA(){
+//        for index in Student.students[Student.curStudentIndex].grades?.indices{
+//
+//        }
+//    }
     
     func okAlert(title: String, message: String){
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)

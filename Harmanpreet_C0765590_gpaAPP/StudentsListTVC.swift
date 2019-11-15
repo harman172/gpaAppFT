@@ -82,6 +82,8 @@ class StudentsListTVC: UITableViewController, UISearchResultsUpdating {
                 name = Student.students[indexPath.row].firstName + " " + Student.students[indexPath.row].lastName
             }
             cell.textLabel?.text = name
+            
+            calculateCGPA(index: indexPath.row)
             let cgpa = Student.students[indexPath.row].CGPA
             if cgpa != nil{
                 cell.detailTextLabel?.text = "cgpa"
@@ -97,6 +99,17 @@ class StudentsListTVC: UITableViewController, UISearchResultsUpdating {
     
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
+    }
+    
+    func calculateCGPA(index: Int){
+        var numberOfSem = 0
+        var totalGrades = 0.0
+        for grades in Student.students[index].grades.values{
+            numberOfSem += 1
+            totalGrades += grades
+        }
+        
+        Student.students[index].CGPA = (totalGrades / Double(numberOfSem))
     }
     
    
