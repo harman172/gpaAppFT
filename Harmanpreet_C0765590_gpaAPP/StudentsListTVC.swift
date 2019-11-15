@@ -83,11 +83,12 @@ class StudentsListTVC: UITableViewController, UISearchResultsUpdating {
             }
             cell.textLabel?.text = name
             
-            calculateCGPA(index: indexPath.row)
-            let cgpa = Student.students[indexPath.row].CGPA
-            if cgpa != nil{
-                cell.detailTextLabel?.text = "cgpa"
-            } 
+            if !Student.students[indexPath.row].grades.isEmpty{
+                calculateCGPA(index: indexPath.row)
+                cell.detailTextLabel?.text = "\(Student.students[indexPath.row].CGPA)"
+            }
+           
+          
             return cell
         }
         return UITableViewCell()
