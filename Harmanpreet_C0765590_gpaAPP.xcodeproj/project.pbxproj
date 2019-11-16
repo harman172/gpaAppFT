@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9BA90B79237E0DEC00447C35 /* CourseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA90B78237E0DEC00447C35 /* CourseModel.swift */; };
 		B515D273237D194D00318663 /* GPACalculatorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B515D272237D194D00318663 /* GPACalculatorVC.swift */; };
+		B5313E05237FAB8900D3C338 /* SemesterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5313E04237FAB8800D3C338 /* SemesterModel.swift */; };
 		B54DD21E237E7629005081BD /* SemestersListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54DD21D237E7629005081BD /* SemestersListTVC.swift */; };
 		B54DD220237E7B88005081BD /* Clapping.wav in Resources */ = {isa = PBXBuildFile; fileRef = B54DD21F237E7B88005081BD /* Clapping.wav */; };
 		B5F8175E237C9FAD00986C13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F8175D237C9FAD00986C13 /* AppDelegate.swift */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		9BA90B78237E0DEC00447C35 /* CourseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseModel.swift; sourceTree = "<group>"; };
 		B515D272237D194D00318663 /* GPACalculatorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPACalculatorVC.swift; sourceTree = "<group>"; };
+		B5313E04237FAB8800D3C338 /* SemesterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemesterModel.swift; sourceTree = "<group>"; };
 		B54DD21D237E7629005081BD /* SemestersListTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemestersListTVC.swift; sourceTree = "<group>"; };
 		B54DD21F237E7B88005081BD /* Clapping.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Clapping.wav; sourceTree = "<group>"; };
 		B5F8175A237C9FAD00986C13 /* Harmanpreet_C0765590_gpaAPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Harmanpreet_C0765590_gpaAPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +59,16 @@
 			path = Audio;
 			sourceTree = "<group>";
 		};
+		B5313E03237FAAE700D3C338 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B5F81773237CA0F400986C13 /* StudentModel.swift */,
+				9BA90B78237E0DEC00447C35 /* CourseModel.swift */,
+				B5313E04237FAB8800D3C338 /* SemesterModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		B5F81751237C9FAD00986C13 = {
 			isa = PBXGroup;
 			children = (
@@ -76,6 +88,7 @@
 		B5F8175C237C9FAD00986C13 /* Harmanpreet_C0765590_gpaAPP */ = {
 			isa = PBXGroup;
 			children = (
+				B5313E03237FAAE700D3C338 /* Models */,
 				9BA90B75237DFD1900447C35 /* Audio */,
 				B5F8175D237C9FAD00986C13 /* AppDelegate.swift */,
 				B5F8175F237C9FAD00986C13 /* SceneDelegate.swift */,
@@ -84,10 +97,8 @@
 				B5F81768237C9FB100986C13 /* LaunchScreen.storyboard */,
 				B5F8176B237C9FB100986C13 /* Info.plist */,
 				B5F81771237CA0DE00986C13 /* StudentsListTVC.swift */,
-				B5F81773237CA0F400986C13 /* StudentModel.swift */,
 				B5F81775237CB4E400986C13 /* AddNewStudentVC.swift */,
 				B515D272237D194D00318663 /* GPACalculatorVC.swift */,
-				9BA90B78237E0DEC00447C35 /* CourseModel.swift */,
 				B54DD21D237E7629005081BD /* SemestersListTVC.swift */,
 			);
 			path = Harmanpreet_C0765590_gpaAPP;
@@ -167,6 +178,7 @@
 			files = (
 				B5F81772237CA0DE00986C13 /* StudentsListTVC.swift in Sources */,
 				B5F81774237CA0F400986C13 /* StudentModel.swift in Sources */,
+				B5313E05237FAB8900D3C338 /* SemesterModel.swift in Sources */,
 				B5F8175E237C9FAD00986C13 /* AppDelegate.swift in Sources */,
 				B5F81760237C9FAD00986C13 /* SceneDelegate.swift in Sources */,
 				B5F81776237CB4E400986C13 /* AddNewStudentVC.swift in Sources */,

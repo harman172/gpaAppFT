@@ -82,11 +82,12 @@ class StudentsListTVC: UITableViewController, UISearchResultsUpdating {
                 name = Student.students[indexPath.row].firstName + " " + Student.students[indexPath.row].lastName
             }
             cell.textLabel?.text = name
+//            cell.detailTextLabel?.text = "\(Student.students[indexPath.row].cgpa)"
             
-            if !Student.students[indexPath.row].grades.isEmpty{
-                calculateCGPA(index: indexPath.row)
-                cell.detailTextLabel?.text = "\(Student.students[indexPath.row].CGPA)"
-            }
+//            if !Student.students[indexPath.row].grades.isEmpty{
+//                calculateCGPA(index: indexPath.row)
+//                cell.detailTextLabel?.text = "\(Student.students[indexPath.row].CGPA)"
+//            }
            
           
             return cell
@@ -95,23 +96,23 @@ class StudentsListTVC: UITableViewController, UISearchResultsUpdating {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Student.curStudentIndex = indexPath.row
+//        Student.curStudentIndex = indexPath.row
     }
     
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
     }
     
-    func calculateCGPA(index: Int){
-        var numberOfSem = 0
-        var totalGrades = 0.0
-        for grades in Student.students[index].grades.values{
-            numberOfSem += 1
-            totalGrades += grades
-        }
-        
-        Student.students[index].CGPA = (totalGrades / Double(numberOfSem))
-    }
+//    func calculateCGPA(index: Int){
+//        var numberOfSem = 0
+//        var totalGrades = 0.0
+//        for grades in Student.students[index].grades.values{
+//            numberOfSem += 1
+//            totalGrades += grades
+//        }
+//
+//        Student.students[index].CGPA = (totalGrades / Double(numberOfSem))
+//    }
     
    
     /*
@@ -149,14 +150,23 @@ class StudentsListTVC: UITableViewController, UISearchResultsUpdating {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        
+        if let destSemList = segue.destination as? SemestersListTVC{
+            
+            if let tableCell = sender as? UITableViewCell{
+                if let index = tableView.indexPath(for: tableCell)?.row{
+                    destSemList.curStudentIndex = index
+                }
+            }
+        }
     }
-    */
+   
 
 }

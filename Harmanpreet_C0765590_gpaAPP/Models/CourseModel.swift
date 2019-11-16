@@ -8,11 +8,9 @@
 
 import Foundation
 
-struct Semesters{
+struct Course{
     
-    var semester: String
-    var courses: [String]
-    
-    static var semesters = [Semesters]()
+    var courseName: String
+    var marksObtained: Double?
     
 }

@@ -9,6 +9,8 @@
 import UIKit
 
 class SemestersListTVC: UITableViewController {
+    
+    var curStudentIndex = -1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,15 +21,15 @@ class SemestersListTVC: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        Semesters.semesters = []
-        
-        let sem1 = Semesters(semester: "Semester 1", courses: ["MAD 3004","MAD 2303", "MAD 3463", "MAD 3115", "MAD 3125"])
-        let sem2 = Semesters(semester: "Semester 2", courses: ["MAD 3001","MAD 2234", "MAD 2115", "MAD 3632", "MAD 4115"])
-        let sem3 = Semesters(semester: "Semester 3", courses: ["MAD 2003","MAD 2016", "MAD 3006", "MAD 3215", "MAD 3022"])
-        
-        Semesters.semesters.append(sem1)
-        Semesters.semesters.append(sem2)
-        Semesters.semesters.append(sem3)
+//        Semesters.semesters = []
+//        
+//        let sem1 = Semesters(semester: "Semester 1", courses: ["MAD 3004","MAD 2303", "MAD 3463", "MAD 3115", "MAD 3125"])
+//        let sem2 = Semesters(semester: "Semester 2", courses: ["MAD 3001","MAD 2234", "MAD 2115", "MAD 3632", "MAD 4115"])
+//        let sem3 = Semesters(semester: "Semester 3", courses: ["MAD 2003","MAD 2016", "MAD 3006", "MAD 3215", "MAD 3022"])
+//        
+//        Semesters.semesters.append(sem1)
+//        Semesters.semesters.append(sem2)
+//        Semesters.semesters.append(sem3)
         
     }
 
@@ -40,7 +42,7 @@ class SemestersListTVC: UITableViewController {
 */
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return Semesters.semesters.count
+        return Student.students[curStudentIndex].semesters.count
     }
 
     
@@ -48,13 +50,16 @@ class SemestersListTVC: UITableViewController {
         
         // Configure the cell...
         if let cell = tableView.dequeueReusableCell(withIdentifier: "semCell"){
-            cell.textLabel?.text = Semesters.semesters[indexPath.row].semester
             
-            var GPA = " "
-            if !Student.students[Student.curStudentIndex].grades.isEmpty{
-                GPA = "\(Student.students[Student.curStudentIndex].grades[Semesters.semesters[indexPath.row].semester] ?? 0.0)"
-            }
-            cell.detailTextLabel?.text = GPA
+//            cell.textLabel?.text = Semesters.semesters[indexPath.row].semester
+            
+            cell.textLabel?.text = Student.students[curStudentIndex].semesters[indexPath.row].semesterName
+            
+//            var GPA = " "
+//            if !Student.students[Student.curStudentIndex].grades.isEmpty{
+//                GPA = "\(Student.students[Student.curStudentIndex].grades[Semesters.semesters[indexPath.row].semester] ?? 0.0)"
+//            }
+//            cell.detailTextLabel?.text = GPA
             return cell
         }
         return UITableViewCell()
@@ -108,6 +113,7 @@ class SemestersListTVC: UITableViewController {
             if let tableCell = sender as? UITableViewCell{
                 if let index = tableView.indexPath(for: tableCell)?.row{
                     dest.curSem = index
+                    dest.curStudent = curStudentIndex
                 }
             }
         }

@@ -19,14 +19,38 @@ class GPACalculatorVC: UIViewController {
     
     var audioPlayer: AVAudioPlayer!
     var curSem: Int?
+    var curStudent: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        for index in Semesters.semesters[curSem!].courses.indices{
-            courseNames[index].text = Semesters.semesters[curSem!].courses[index]
+//        for index in Semesters.semesters[curSem!].courses.indices{
+//            courseNames[index].text = Semesters.semesters[curSem!].courses[index]
+//        }
+        
+//        for index in Student.students[0].semesters.indices{
+//            courseNames[index].text = Student.students[0].semesters[index].
+//        }
+        
+        print("********")
+        for index in Student.students[curStudent!].semesters[curSem!].courses.indices{
+            courseNames[index].text = "\(Student.students[curStudent!].semesters[curSem!].courses[index].courseName)"
+            
+            let marks = Student.students[curStudent!].semesters[curSem!].courses[index].marksObtained
+            if marks != nil{
+                txtCourses[index].text = "\(marks!)"
+            }
+            
+            let gpa = Student.students[curStudent!].semesters[curSem!].grades
+            if gpa != nil{
+                labelResult.text = String(format: "%.2f / 4" , gpa!)
+            }
+            else{
+                labelResult.text = "ex. 0/4"
+            }
+            print("GPACalc...... ",courseNames[index].text)
         }
         
         
@@ -51,17 +75,20 @@ class GPACalculatorVC: UIViewController {
             }
         }
         
+        for index in courses.indices{
+            Student.students[curStudent!].semesters[curSem!].courses[index].marksObtained = Double(courses[index])!
+        }
+//        let creditHours = creditHoursPerCourse()
+//        let grades = gradesPerCourse(courses: courses)
+//
+//        let calculatedGPA = Student.students[curStudent!].semesters[curSem!].grades
+//
+//        Student.students[Student.curStudentIndex].grades[Semesters.semesters[curSem!].semester] = calculatedGPA
+//        print(Student.students[Student.curStudentIndex].grades)
         
-        let creditHours = creditHoursPerCourse()
-        let grades = gradesPerCourse(courses: courses)
         
-        let calculatedGPA = calculateGPA(hours: creditHours, grades: grades)
-        
-        Student.students[Student.curStudentIndex].grades[Semesters.semesters[curSem!].semester] = calculatedGPA
-        print(Student.students[Student.curStudentIndex].grades)   
+        let calculatedGPA = Student.students[curStudent!].semesters[curSem!].grades!
         labelResult.text =  String(format: "%.2f / 4" , calculatedGPA)
-        
-        
         if calculatedGPA > 2.8{
             let soundURL = Bundle.main.url(forResource: "Clapping", withExtension: "wav")
             audioPlayer = try! AVAudioPlayer(contentsOf: soundURL!)

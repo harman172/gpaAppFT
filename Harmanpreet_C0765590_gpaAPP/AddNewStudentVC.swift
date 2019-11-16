@@ -65,7 +65,36 @@ class AddNewStudentVC: UIViewController {
             let noAction = UIAlertAction(title: "No Way!", style: .cancel, handler: nil)
             let yesAction = UIAlertAction(title: "Yes, I'm Sure!", style: .default) { (yesaction) in
             
-                let s = Student(firstName: fname, lastName: lname, id: id)
+//                let s = Student(firstName: fname, lastName: lname, id: id)
+                
+//                let sem1 = Semester(semesterName: "Semester 1")
+//                let sem2 = Semester(semesterName: "Semester 2")
+//                let sem3 = Semester(semesterName: "Semester 3")
+                
+                let coursesSem1 = [Course(courseName: "MADT 3004", marksObtained: nil),
+                                Course(courseName: "MADT 2303", marksObtained: nil),
+                                Course(courseName: "MADT 3463", marksObtained: nil),
+                                Course(courseName: "MADT 3115", marksObtained: nil),
+                                Course(courseName: "MADT 3125", marksObtained: nil)]
+                let coursesSem2 = [Course(courseName: "MADT 3001", marksObtained: nil),
+                                Course(courseName: "MADT 2234", marksObtained: nil),
+                                Course(courseName: "MADT 2115", marksObtained: nil),
+                                Course(courseName: "MADT 3632", marksObtained: nil),
+                                Course(courseName: "MADT 4115", marksObtained: nil)]
+                let coursesSem3 = [Course(courseName: "MADT 2003", marksObtained: nil),
+                                Course(courseName: "MADT 2016", marksObtained: nil),
+                                Course(courseName: "MADT 3006", marksObtained: nil),
+                                Course(courseName: "MADT 3215", marksObtained: nil),
+                                Course(courseName: "MADT 3022", marksObtained: nil)]
+                
+                let sem1 = Semester(semesterName: "Semester 1", courses: coursesSem1)
+                let sem2 = Semester(semesterName: "Semester 2", courses: coursesSem2)
+                let sem3 = Semester(semesterName: "Semester 3", courses: coursesSem3)
+                
+                let semesters = [sem1, sem2, sem3]
+                
+                let s = Student(firstName: fname, lastName: lname, id: id, semesters: semesters)
+                
                 Student.students.append(s)
                 self.okAlert(title: "New Contact Saved", message: "\(fname) is now a student")
                 self.txtFirstName.text = ""
