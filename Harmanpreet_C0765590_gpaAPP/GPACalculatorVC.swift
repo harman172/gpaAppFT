@@ -26,15 +26,9 @@ class GPACalculatorVC: UIViewController {
 
         // Do any additional setup after loading the view.
         
-//        for index in Semesters.semesters[curSem!].courses.indices{
-//            courseNames[index].text = Semesters.semesters[curSem!].courses[index]
-//        }
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        self.view.addGestureRecognizer(tapGesture)
         
-//        for index in Student.students[0].semesters.indices{
-//            courseNames[index].text = Student.students[0].semesters[index].
-//        }
-        
-        print("********")
         for index in Student.students[curStudent!].semesters[curSem!].courses.indices{
             courseNames[index].text = "\(Student.students[curStudent!].semesters[curSem!].courses[index].courseName)"
             
@@ -50,16 +44,15 @@ class GPACalculatorVC: UIViewController {
             else{
                 labelResult.text = "ex. 0/4"
             }
-            print("GPACalc...... ",courseNames[index].text)
+//            print("GPACalc...... ",courseNames[index].text)
         }
-        
-        
     }
     
-    @IBAction func textFieldDoneEditing(_ sender: UITextField) {
-        sender.resignFirstResponder()
+    @objc func viewTapped(){
+        for index in txtCourses.indices{
+            txtCourses[index].resignFirstResponder()
+        }
     }
-    
     
     
     @IBAction func btnCalculate(_ sender: UIButton) {
@@ -73,19 +66,21 @@ class GPACalculatorVC: UIViewController {
                 okAlert(title: "Warning!!", message: "None of the fields can be empty")
                 return
             }
+            
+            let input = Int(courses[index])
+            print("\(input)")
+            if input! < 0 || input! > 100{
+                okAlert(title: "Warning!!", message: "Marks can only be between 0 and 100")
+                return
+            }
+            
         }
+        
         
         for index in courses.indices{
+            
             Student.students[curStudent!].semesters[curSem!].courses[index].marksObtained = Double(courses[index])!
         }
-//        let creditHours = creditHoursPerCourse()
-//        let grades = gradesPerCourse(courses: courses)
-//
-//        let calculatedGPA = Student.students[curStudent!].semesters[curSem!].grades
-//
-//        Student.students[Student.curStudentIndex].grades[Semesters.semesters[curSem!].semester] = calculatedGPA
-//        print(Student.students[Student.curStudentIndex].grades)
-        
         
         let calculatedGPA = Student.students[curStudent!].semesters[curSem!].grades!
         labelResult.text =  String(format: "%.2f / 4" , calculatedGPA)
@@ -96,85 +91,13 @@ class GPACalculatorVC: UIViewController {
             
         }
         
-        
-        
+        self.view.endEditing(true)
     }
     
-    func creditHoursPerCourse() -> [Double]{
-        var hours = [Double]()
-        for value in courseNames{
-            let hour = String(value.text![value.text!.index(before: value.text!.endIndex)])
-            
-            hours.append(Double(hour) ?? 0.0)
-        }
-        
-        return hours
-    }
-    
-    func gradesPerCourse(courses: [String]) -> [Double]{
-        var grades = [Double]()
-        for index in courses.indices{
-            let c = Double(courses[index]) ?? 0.0
-            grades.append( getGradePoints(course: c))
-        }
-        
-        return grades
-    }
-    
-    func getGradePoints(course: Double) -> Double{
-        
-        switch course {
-            case 94...100:
-                return 4.0
-            case 87...93:
-                return 3.7
-            case 80...86:
-                return 3.5
-            case 77...79:
-                return 3.2
-            case 73...76:
-                return 3.0
-            case 70...72:
-                return 2.7
-            case 67...69:
-                return 2.3
-            case 63...66:
-                return 2.0
-            case 60...62:
-                return 1.7
-            case 50...59:
-                return 1.0
-            default:
-                return 0.0
-        }
-    }
-    
-    func calculateGPA(hours: [Double], grades: [Double]) -> Double{
-        
-        var totalHours = 0.0
-        var GPA = 0.0
-        
-        for hour in hours{
-            for grade in grades{
-                GPA += hour * grade
-                totalHours += hour
-            }
-        }
-        
-        return GPA / totalHours
-        
-    }
-    
-//    func calculateCGPA(){
-//        for index in Student.students[Student.curStudentIndex].grades?.indices{
-//
-//        }
-//    }
     
     func okAlert(title: String, message: String){
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        okAction.setValue(UIColor.brown, forKey: "titleTextColor")
         
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion: nil)

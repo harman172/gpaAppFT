@@ -18,11 +18,14 @@ struct Student{
     
     var semesters: [Semester]
     
-    var cgpa: Double{
+    var cgpa: Double?{
         get{
             var gpa = 0.0
 
             for grades in semesters{
+                guard grades.grades != nil else {
+                    return nil
+                }
                 gpa += grades.grades!
             }
 
@@ -33,11 +36,7 @@ struct Student{
     
    
     static var students = [Student]()
-//    static var curStudentIndex = 0
+
     
-//    init(firstName: String, lastName: String, id: String){
-//        self.firstName = firstName
-//        self.lastName = lastName
-//        self.id = id
-//    }
+    
 }

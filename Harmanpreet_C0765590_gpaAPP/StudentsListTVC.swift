@@ -11,15 +11,8 @@ import UIKit
 class StudentsListTVC: UITableViewController, UISearchResultsUpdating {
     
     let searchController = UISearchController(searchResultsController: nil)
-    var filteredData: [Student] = []
     
-    var isSearchBarEmpty: Bool {
-      return searchController.searchBar.text?.isEmpty ?? true
-    }
-    var isFiltering: Bool {
-      return searchController.isActive && !isSearchBarEmpty
-    }
-    
+    var filteredData: [Student]!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,7 +24,9 @@ class StudentsListTVC: UITableViewController, UISearchResultsUpdating {
         
         searchController.searchResultsUpdater = self
         self.navigationItem.searchController = searchController
-
+        searchController.dimsBackgroundDuringPresentation = false
+        
+        filteredData = Student.students
         
     }
     
@@ -39,10 +34,12 @@ class StudentsListTVC: UITableViewController, UISearchResultsUpdating {
         
         if let searchText = searchController.searchBar.text{
             
-            filteredData = Student.students.filter{ (student) -> Bool in
+            filteredData = searchText.isEmpty ? Student.students : Student.students.filter({ (student) -> Bool in
                 let name = student.firstName + " " + student.lastName
                 return name.lowercased().contains(searchText.lowercased())
-            }
+            })
+            
+            
         }
         
         tableView.reloadData()
@@ -60,12 +57,8 @@ class StudentsListTVC: UITableViewController, UISearchResultsUpdating {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        
-        if isFiltering{
-            return filteredData.count
-        }
-        
-        return Student.students.count
+    
+        return filteredData.count
     }
 
     
@@ -75,46 +68,45 @@ class StudentsListTVC: UITableViewController, UISearchResultsUpdating {
 
         if let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell"){
             
-            let name: String
-            if isFiltering{
-                name = filteredData[indexPath.row].firstName + " " + filteredData[indexPath.row].lastName
-            } else{
-                name = Student.students[indexPath.row].firstName + " " + Student.students[indexPath.row].lastName
+            cell.textLabel?.text = filteredData[indexPath.row].firstName + " " + filteredData[indexPath.row].lastName
+            if let cgpa = filteredData[indexPath.row].cgpa{
+                cell.detailTextLabel?.text = String(format: "%.2f", cgpa)
             }
-            cell.textLabel?.text = name
-//            cell.detailTextLabel?.text = "\(Student.students[indexPath.row].cgpa)"
             
-//            if !Student.students[indexPath.row].grades.isEmpty{
-//                calculateCGPA(index: indexPath.row)
-//                cell.detailTextLabel?.text = "\(Student.students[indexPath.row].CGPA)"
-//            }
-           
-          
             return cell
         }
         return UITableViewCell()
     }
+    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        Student.curStudentIndex = indexPath.row
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        filteredData = Student.students
         tableView.reloadData()
     }
     
-//    func calculateCGPA(index: Int){
-//        var numberOfSem = 0
-//        var totalGrades = 0.0
-//        for grades in Student.students[index].grades.values{
-//            numberOfSem += 1
-//            totalGrades += grades
-//        }
-//
-//        Student.students[index].CGPA = (totalGrades / Double(numberOfSem))
-//    }
+     // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       // Get the new view controller using segue.destination.
+       // Pass the selected object to the new view controller.
+       
+       if let destSemList = segue.destination as? SemestersListTVC{
+           
+           if let tableCell = sender as? UITableViewCell{
+               if let index = tableView.indexPath(for: tableCell)?.row{
+    //                    destSemList.curStudentIndex = index
+                   destSemList.curStudentID = filteredData[index].id
+               }
+           }
+       }
+    }
     
-   
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -151,22 +143,7 @@ class StudentsListTVC: UITableViewController, UISearchResultsUpdating {
     */
 
     
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-        
-        if let destSemList = segue.destination as? SemestersListTVC{
-            
-            if let tableCell = sender as? UITableViewCell{
-                if let index = tableView.indexPath(for: tableCell)?.row{
-                    destSemList.curStudentIndex = index
-                }
-            }
-        }
-    }
+  
    
 
 }
